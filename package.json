@@ -1,0 +1,31 @@
+{
+	"name": "chatbox-backend",
+	"version": "0.0.1",
+	"main": "build/index.js",
+	"scripts": {
+		"start": "node build/index.js",
+		"build": "tsc",
+		"dev": "tsc --watch | nodemon build/index.js",
+		"prisma:generate": "prisma generate",
+		"prisma:pull": "prisma db pull",
+		"prisma:push": "prisma db push"
+	},
+	"author": "Piovarcs Patrik, Schweitzer Ádám Dávid & Gallai József",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/express": "^4.17.21",
+		"@types/lodash": "^4.17.0",
+		"@types/node": "^20.12.7",
+		"cors": "^2.8.5",
+		"express": "^4.19.2",
+		"lodash": "^4.17.21",
+		"mysql2": "^3.9.7",
+		"nodemon": "^3.1.0",
+		"prisma": "^5.13.0",
+		"socket.io": "^4.7.5",
+		"typescript": "^5.4.5"
+	},
+	"dependencies": {
+		"@prisma/client": "^5.13.0"
+	}
+}
