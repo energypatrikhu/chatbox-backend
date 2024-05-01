@@ -24,10 +24,6 @@ app.use(cors(corsSettings));
 
 app.use('/user', userController);
 
-app.get('/', (req, res) => {
-	res.send('Hello World!');
-});
-
 server.on('request', app);
 server.listen(3000, () => {
 	console.log('Server listening on port 3000');
