@@ -110,3 +110,5 @@ router.put('/', async (req, res) => {
 		data: user,
 	});
 });
+
+export default router;
