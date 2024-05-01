@@ -4,6 +4,8 @@ import handleSocket from './socket';
 import { Server } from 'socket.io';
 import cors from 'cors';
 
+import userController from './controllers/user';
+
 const server = createServer();
 const app = express();
 handleSocket(new Server(server, { path: '/socket' }));
@@ -19,6 +21,8 @@ const corsSettings = {
 	optionsSuccessStatus: 204,
 } satisfies cors.CorsOptions;
 app.use(cors(corsSettings));
+
+app.use('/user', userController);
 
 app.get('/', (req, res) => {
 	res.send('Hello World!');
