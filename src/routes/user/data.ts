@@ -54,6 +54,7 @@ router.get('/:userId', async (req, res) => {
 			id: true,
 			name: true,
 			email: true,
+			lastOpened: true,
 		},
 	});
 
