@@ -29,47 +29,47 @@ router.put('/', async (req, res) => {
 		});
 	}
 
-	if (password.length < 8) {
-		return res.status(400).json({
-			success: false,
-			error: 'A jelszónak legalább 8 karakter hosszúnak kell lennie',
-		});
-	} else if (!/[^a-zA-Z0-9]/.test(password)) {
-		return res.status(400).json({
-			success: false,
-			error: 'A jelszónak legalább egy speciális karaktert kell tartalmaznia',
-		});
-	} else if (!/[A-Z]/.test(password)) {
-		return res.status(400).json({
-			success: false,
-			error: 'A jelszónak legalább egy nagybetűt kell tartalmaznia',
-		});
-	} else if (!/[a-z]/.test(password)) {
-		return res.status(400).json({
-			success: false,
-			error: 'A jelszónak legalább egy kisbetűt kell tartalmaznia',
-		});
-	} else if (!/[0-9]/.test(password)) {
-		return res.status(400).json({
-			success: false,
-			error: 'A jelszónak legalább egy számot kell tartalmaznia',
-		});
-	} else if (/\s/.test(password)) {
-		return res.status(400).json({
-			success: false,
-			error: 'A jelszó nem tartalmazhat szóközt',
-		});
-	} else if (password.includes(name)) {
-		return res.status(400).json({
-			success: false,
-			error: 'A jelszó nem tartalmazhatja a nevet',
-		});
-	} else if (password.includes(email)) {
-		return res.status(400).json({
-			success: false,
-			error: 'A jelszó nem tartalmazhatja az e-mailt',
-		});
-	}
+	// if (password.length < 8) {
+	// 	return res.status(400).json({
+	// 		success: false,
+	// 		error: 'A jelszónak legalább 8 karakter hosszúnak kell lennie',
+	// 	});
+	// } else if (!/[^a-zA-Z0-9]/.test(password)) {
+	// 	return res.status(400).json({
+	// 		success: false,
+	// 		error: 'A jelszónak legalább egy speciális karaktert kell tartalmaznia',
+	// 	});
+	// } else if (!/[A-Z]/.test(password)) {
+	// 	return res.status(400).json({
+	// 		success: false,
+	// 		error: 'A jelszónak legalább egy nagybetűt kell tartalmaznia',
+	// 	});
+	// } else if (!/[a-z]/.test(password)) {
+	// 	return res.status(400).json({
+	// 		success: false,
+	// 		error: 'A jelszónak legalább egy kisbetűt kell tartalmaznia',
+	// 	});
+	// } else if (!/[0-9]/.test(password)) {
+	// 	return res.status(400).json({
+	// 		success: false,
+	// 		error: 'A jelszónak legalább egy számot kell tartalmaznia',
+	// 	});
+	// } else if (/\s/.test(password)) {
+	// 	return res.status(400).json({
+	// 		success: false,
+	// 		error: 'A jelszó nem tartalmazhat szóközt',
+	// 	});
+	// } else if (password.includes(name)) {
+	// 	return res.status(400).json({
+	// 		success: false,
+	// 		error: 'A jelszó nem tartalmazhatja a nevet',
+	// 	});
+	// } else if (password.includes(email)) {
+	// 	return res.status(400).json({
+	// 		success: false,
+	// 		error: 'A jelszó nem tartalmazhatja az e-mailt',
+	// 	});
+	// }
 
 	const checkEmail = await prisma.user.findUnique({
 		where: {
@@ -107,7 +107,6 @@ router.put('/', async (req, res) => {
 
 	return res.status(201).json({
 		success: true,
-		data: user,
 	});
 });
 
