@@ -20,6 +20,7 @@ model User {
   password   String
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
+  lastOpened String    @default("")
   Messages   Message[]
   Groups     Group[]   @relation("UserToGroup")
   Login      Login[]
@@ -34,8 +35,8 @@ model Message {
   updatedAt DateTime @updatedAt
   User      User     @relation(fields: [userId], references: [id])
   userId    Int
-  Group     Group?   @relation(fields: [groupId], references: [id])
-  groupId   Int?
+  Group     Group    @relation(fields: [groupId], references: [id])
+  groupId   Int
 }
 
 model Group {
