@@ -14,32 +14,33 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  email     String    @unique
-  name      String    @unique
-  password  String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  Contacts  User[]    @relation("UserToUser")
-  ContactOf User[]    @relation("UserToUser")
-  Messages  Message[]
-  Groups    Group[]   @relation("UserToGroup")
-  Login     Login[]
+  id         Int       @id @default(autoincrement())
+  email      String    @unique
+  name       String    @unique
+  password   String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  Messages   Message[]
+  Groups     Group[]   @relation("UserToGroup")
+  Login      Login[]
+  Contacts   User[]    @relation("UserToManyContacts")
+  ContactsOf User[]    @relation("UserToManyContacts")
 }
 
 model Message {
   id        Int      @id @default(autoincrement())
-  message   String
+  text      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  sender    User     @relation(fields: [senderId], references: [id])
-  senderId  Int
+  User      User     @relation(fields: [userId], references: [id])
+  userId    Int
   Group     Group?   @relation(fields: [groupId], references: [id])
   groupId   Int?
 }
 
 model Group {
   id        Int       @id @default(autoincrement())
+  type      String
   name      String    @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
