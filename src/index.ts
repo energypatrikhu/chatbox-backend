@@ -5,10 +5,15 @@ import cors from 'cors';
 import handleSocket from './socket';
 
 import userController from './controllers/user';
+import chatController from './controllers/chat';
 
 const app = express();
 const server = createServer(app);
-handleSocket(new Server(server, { path: '/socket', cors: { origin: '*' } }));
+export const io = new Server(server, {
+	path: '/socket',
+	cors: { origin: '*' },
+});
+handleSocket(io);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,6 +28,7 @@ const corsSettings = {
 app.use(cors(corsSettings));
 
 app.use('/user', userController);
+app.use('/chat', chatController);
 
 server.listen(3000, () => {
 	console.log('Server listening on port 3000');
