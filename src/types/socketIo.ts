@@ -1,6 +1,6 @@
 export interface Message {
-	senderId: number;
-	destinationId: number;
+	senderId: string;
+	destinationId: string;
 	destinationType: 'group' | 'contact';
 	text: string;
 }
