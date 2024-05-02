@@ -16,7 +16,7 @@ router.get('/:roomType/:roomId', async (req, res) => {
 		});
 	}
 
-	const messages = await prisma.group.findMany({
+	const messages = await prisma.group.findUnique({
 		where: {
 			id: parseInt(roomId),
 			type: roomType,
@@ -26,17 +26,17 @@ router.get('/:roomType/:roomId', async (req, res) => {
 				include: {
 					User: true,
 				},
+				take: 100,
+				orderBy: {
+					createdAt: 'desc',
+				},
 			},
-		},
-		take: 100,
-		orderBy: {
-			createdAt: 'desc',
 		},
 	});
 
 	res.json({
 		success: true,
-		data: messages,
+		data: messages?.Messages || [],
 	});
 });
 
