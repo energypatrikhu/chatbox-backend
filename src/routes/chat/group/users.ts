@@ -57,10 +57,10 @@ router.post('/setLastOpened', async (req, res) => {
 
 	await prisma.user.update({
 		where: {
-			id: parseInt(groupId),
+			id: parseInt(userId),
 		},
 		data: {
-			lastOpened: groupId,
+			lastOpened: parseInt(groupId),
 		},
 	});
 
