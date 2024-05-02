@@ -20,7 +20,7 @@ model User {
   password   String
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
-  lastOpened String    @default("")
+  lastOpened Int       @default(0)
   Messages   Message[]
   Groups     Group[]   @relation("UserToGroup")
   Login      Login[]
