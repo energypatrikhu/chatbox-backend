@@ -24,8 +24,6 @@ model User {
   Messages   Message[]
   Groups     Group[]   @relation("UserToGroup")
   Login      Login[]
-  Contacts   User[]    @relation("UserToManyContacts")
-  ContactsOf User[]    @relation("UserToManyContacts")
 }
 
 model Message {
@@ -41,7 +39,6 @@ model Message {
 
 model Group {
   id        Int       @id @default(autoincrement())
-  type      String
   name      String    @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt

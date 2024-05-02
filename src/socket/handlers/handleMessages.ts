@@ -6,7 +6,7 @@ export default function handleMessages(io: Server, socket: Socket) {
 	socket.on('message', async (message: Message) => {
 		console.log('Received message', message);
 
-		if (!message.destinationType || !message.destinationId) {
+		if (!message.destinationId) {
 			console.log('Invalid message');
 			return;
 		}
@@ -14,7 +14,6 @@ export default function handleMessages(io: Server, socket: Socket) {
 		const updateData = await prisma.group.update({
 			where: {
 				id: parseInt(message.destinationId),
-				type: message.destinationType,
 			},
 			data: {
 				Messages: {
@@ -40,7 +39,6 @@ export default function handleMessages(io: Server, socket: Socket) {
 						Group: {
 							select: {
 								id: true,
-								type: true,
 							},
 						},
 					},
@@ -52,9 +50,7 @@ export default function handleMessages(io: Server, socket: Socket) {
 			},
 		});
 
-		updateData.Messages;
-
-		io.to(`${message.destinationType}:${message.destinationId}`).emit(
+		io.to(`${message.destinationId}`).emit(
 			'message',
 			updateData.Messages[0],
 		);

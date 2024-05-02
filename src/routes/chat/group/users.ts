@@ -3,9 +3,8 @@ import prisma from '../../../libs/prisma';
 
 const router = Router();
 
-router.get('/:groupType/:groupId', async (req, res) => {
-	const { groupType, groupId } = req.params as {
-		groupType: string;
+router.get('/:groupId', async (req, res) => {
+	const { groupId } = req.params as {
 		groupId: string;
 	};
 
@@ -19,7 +18,6 @@ router.get('/:groupType/:groupId', async (req, res) => {
 	const users = await prisma.group.findUnique({
 		where: {
 			id: parseInt(groupId),
-			type: groupType,
 		},
 		select: {
 			Users: {
@@ -38,9 +36,8 @@ router.get('/:groupType/:groupId', async (req, res) => {
 });
 
 router.post('/setLastOpened', async (req, res) => {
-	const { userId, groupType, groupId } = req.body as {
+	const { userId, groupId } = req.body as {
 		userId: string;
-		groupType: string;
 		groupId: string;
 	};
 
@@ -48,13 +45,6 @@ router.post('/setLastOpened', async (req, res) => {
 		return res.status(400).json({
 			success: false,
 			error: 'Érvénytelen csoport azonosító',
-		});
-	}
-
-	if (!groupType) {
-		return res.status(400).json({
-			success: false,
-			error: 'Érvénytelen csoport típus',
 		});
 	}
 
@@ -70,7 +60,7 @@ router.post('/setLastOpened', async (req, res) => {
 			id: parseInt(groupId),
 		},
 		data: {
-			lastOpened: `${groupType}:${groupId}`,
+			lastOpened: groupId,
 		},
 	});
 

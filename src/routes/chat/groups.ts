@@ -27,7 +27,6 @@ router.put('/createGroup', async (req, res) => {
 	const group = await prisma.group.create({
 		data: {
 			name: groupName,
-			type: 'group',
 			Users: {
 				connect: {
 					id: userId,

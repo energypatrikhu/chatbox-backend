@@ -30,8 +30,8 @@ export default async function authSocket(socket: Socket) {
 	console.log('Socket authenticated, joining groups');
 
 	for (const group of user.Groups) {
-		socket.join(`${group.type}:${group.id}`);
-		console.log(`[${socket.id}] joining ${group.type}:${group.id}`);
+		socket.join(`${group.id}`);
+		console.log(`[${socket.id}] joining group ${group.id}`);
 	}
 
 	return user;
