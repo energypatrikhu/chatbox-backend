@@ -4,10 +4,10 @@ import prisma from '../../libs/prisma';
 
 export default function handleMessages(io: Server, socket: Socket) {
 	socket.on('message', async (message: Message) => {
-		console.log('Received message', message);
+		// console.log('Received message', message);
 
 		if (!message.destinationId) {
-			console.log('Invalid message');
+			// console.log('Invalid message');
 			return;
 		}
 

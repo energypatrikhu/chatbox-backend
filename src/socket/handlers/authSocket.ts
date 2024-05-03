@@ -6,10 +6,10 @@ export default async function authSocket(socket: Socket) {
 		userId?: number;
 	};
 
-	console.log('Authenticating socket');
+	// console.log('Authenticating socket');
 
 	if (!userId) {
-		console.log('No user id');
+		// console.log('No user id');
 		return socket.disconnect();
 	}
 
@@ -23,15 +23,15 @@ export default async function authSocket(socket: Socket) {
 	});
 
 	if (!user) {
-		console.log('No user');
+		// console.log('No user');
 		return socket.disconnect();
 	}
 
-	console.log('Socket authenticated, joining groups');
+	// console.log('Socket authenticated, joining groups');
 
 	for (const group of user.Groups) {
 		socket.join(`${group.id}`);
-		console.log(`[${socket.id}] joining group ${group.id}`);
+		// console.log(`[${socket.id}] joining group ${group.id}`);
 	}
 
 	return user;
