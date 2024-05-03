@@ -29,6 +29,9 @@ export default function handleMessages(io: Server, socket: Socket) {
 			},
 			include: {
 				Messages: {
+					where: {
+						userId: parseInt(message.senderId),
+					},
 					include: {
 						User: {
 							select: {
@@ -50,9 +53,6 @@ export default function handleMessages(io: Server, socket: Socket) {
 			},
 		});
 
-		io.to(`${message.destinationId}`).emit(
-			'message',
-			updateData.Messages[0],
-		);
+		io.to(message.destinationId).emit('message', updateData.Messages[0]);
 	});
 }
